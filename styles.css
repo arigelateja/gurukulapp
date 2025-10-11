@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Baloo 2', cursive;
     line-height: 1.6;
     color: #333;
     overflow-x: hidden;
@@ -170,27 +170,28 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+  position: relative; /* important so floating elements stay inside */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh; /* full screen */
+  background: linear-gradient(135deg, #4a6cf7, #ff6b6b); /* blue-pink theme */
+  color: white;
+  overflow: hidden;
 }
 
+/* Center the content inside the hero section */
 .hero-content {
-    flex: 1;
-    padding: 0 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
+  position: relative;
+  z-index: 2; /* keeps text above floating elements */
+  max-width: 800px;
+  padding: 2rem;
+  margin: 0 auto;      /* centers the content horizontally */
+  text-align: center;  /* centers text inside */
 }
 
+/* Style headings */
 .hero-content h1 {
     font-size: 3.5rem;
     font-weight: 700;
@@ -199,15 +200,16 @@ body {
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+    font-size: 1.3rem;
     opacity: 0.9;
 }
 
+/* Center buttons */
 .hero-buttons {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: center; /* centers buttons horizontally */
 }
 
 .btn {
@@ -251,43 +253,33 @@ body {
 }
 
 .floating-elements {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    overflow: visible;  /* allow emojis to float outside container */
+    pointer-events: none;
+    z-index: 1;         /* behind hero-content */
 }
 
 .element {
     position: absolute;
     font-size: 3rem;
-    animation: float 3s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
+    z-index: 1;         /* ensure below hero-content */
+    color: #fff;        /* make emojis visible over background */
 }
 
-.element-1 {
-    top: 20%;
-    left: 20%;
-    animation-delay: 0s;
-}
+/* individual positioning with delays */
+.element-1 { top: 20%; left: 10%; animation-delay: 0s; }
+.element-2 { top: 40%; left: 20%; animation-delay: 0.5s; }
+.element-3 { top: 60%; left: 70%; animation-delay: 1s; }
+.element-4 { top: 30%; left: 85%; animation-delay: 1.5s; }
 
-.element-2 {
-    top: 40%;
-    right: 20%;
-    animation-delay: 0.5s;
-}
-
-.element-3 {
-    bottom: 30%;
-    left: 30%;
-    animation-delay: 1s;
-}
-
-.element-4 {
-    bottom: 20%;
-    right: 30%;
-    animation-delay: 1.5s;
-}
-
+/* floating animation */
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
+    0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-20px); }
 }
 
@@ -1806,20 +1798,4 @@ body {
 /* Smooth Scrolling */
 html {
     scroll-behavior: smooth;
-}
-
-/* Loading Animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
 }
